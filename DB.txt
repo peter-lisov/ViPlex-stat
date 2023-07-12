@@ -1,0 +1,51 @@
+nova_relation_playsolution2playlist
+nova_relation_playlist2scene
+nova_relation_scene2page
+nova_border
+nova_material_text
+nova_material_analog_clock
+nova_material_digital_clock
+nova_material_simple_weather
+nova_material_simple_rss
+nova_material_arch_text
+nova_relation_template2scene
+nova_template_customgroup
+nova_material_customgroup
+nova_template
+nova_material
+nova_relation_page2widget
+nova_playsolution
+nova_widgetGroup
+nova_widgetContainer
+nova_relation_widgetGroup2widget
+nova_relation_widgetContainer2widget
+nova_relation_widgetContainer2widgetGroup
+nova_screenproto
+nova_vnnoxserver_userdefinedserver
+nova_careserver_userdefinedserver
+nova_customer_serverInfo
+nova_scene
+nova_page
+nova_widget
+nova_playlist
+nova_schedule_constraint
+nova_relation_schedule2playlist
+
+
+
+nova_playlist
+nova_page
+nova_widget
+nova_relation_playlist2scene
+nova_relation_scene2page
+nova_relation_page2widget
+
+SELECT nova_playlist.name, nova_page.viewOrder, nova_widget.name, nova_widget.duration FROM nova_playlist 
+LEFT JOIN nova_relation_playlist2scene ON nova_playlist.uuid = nova_relation_playlist2scene.playlistuuid 
+LEFT JOIN nova_scene ON nova_relation_playlist2scene.sceneuuid = nova_scene.uuid 
+LEFT JOIN nova_relation_scene2page ON nova_relation_playlist2scene.sceneuuid = nova_relation_scene2page.sceneuuid 
+LEFT JOIN nova_page ON nova_relation_scene2page.pageuuid = nova_page.uuid 
+LEFT JOIN nova_relation_page2widget ON nova_relation_scene2page.pageuuid = nova_relation_page2widget.pageuuid 
+LEFT JOIN nova_widget ON nova_relation_page2widget.widgetuuid = nova_widget.uuid 
+WHERE nova_scene.constraints NOT LIKE '%2,4,6%' 
+ORDER BY nova_playlist.name, nova_page.viewOrder;
