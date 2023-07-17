@@ -1,13 +1,18 @@
 #include <stdio.h>
 #include <sqlite3.h> 
 
+#include "screens.h"
+
+Screens scr;
+
 static int callback(void *data, int argc, char **argv, char **azColName){
    int i;
    for(i = 0; i<argc; i++){
       printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
    }
-   
+
    printf("\n");
+scr.add(argv[0], stoi(argv[1]), argv[2], stoi(argv[3]));
    return 0;
 }
 
@@ -64,6 +69,9 @@ int main(int argc, char* argv[]) {
    } else {
       fprintf(stdout, "Operation done successfully\n");
    }
+
+scr.print("Viaduk");
+scr.print();
 
    sqlite3_close(db);
 }

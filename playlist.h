@@ -23,6 +23,7 @@ public:
 	string getName() {return name;}
 	int getDuration() {return duration;}
 	void add(int iOrder, string iName, int iDuration);
+	void print();
 };
 
 #endif

@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include "playlist.h"
 
@@ -19,6 +20,17 @@ void Playlist::add(int iOrder, string iName, int iDuration)
 	newItem->duration = iDuration;
 	newItem->nextItem = firstItem;
 	firstItem = newItem;
+	count++;
+	duration += iDuration;
+}
+
+void Playlist::print()
+{
+	PlaylistItem *item = firstItem;
+        while(item) {
+		cout << item->order << '\t' << item->duration << '\t' << item->name << endl;
+		item = item->nextItem;
+	}
 }
 
 Playlist::~Playlist()
