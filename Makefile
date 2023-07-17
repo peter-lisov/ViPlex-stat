@@ -1,18 +1,17 @@
-CXX = $(shell wx-config --cxx)
+CC = g++
+CFLAGS = -c -Wall `wx-config --cxxflags` 
+LDFLAGS = -l sqlite3 `wx-config --libs`
+SOURCES = main.cpp playlist.cpp screens.cpp
+OBJECTS = $(SOURCES:.cpp=.o)
+EXECUTABLE = ViPlex-stat
 
-PROGRAM = wxMinimal
+all: $(SOURCES) $(EXECUTABLE)
 
-OBJECTS = $(PROGRAM).o
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 
-# implementation
-.SUFFIXES:      .o .cpp
-.cpp.o :
-	$(CXX) -c `wx-config --cxxflags` -o $@ $<
-
-all:	$(PROGRAM)
-
-$(PROGRAM):	$(OBJECTS)
-	$(CXX) -o $(PROGRAM) $(OBJECTS) `wx-config --libs`
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
 	rm -f *.o $(PROGRAM)
