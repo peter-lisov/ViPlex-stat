@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include "playlist.h"
 
@@ -29,6 +30,15 @@ void Playlist::print()
 	PlaylistItem *item = firstItem;
         while(item) {
 		cout << item->order << '\t' << item->duration << '\t' << item->name << endl;
+		item = item->nextItem;
+	}
+}
+
+void Playlist::print(ofstream &file)
+{
+	PlaylistItem *item = firstItem;
+        while(item) {
+		file << item->order << '\t' << item->duration << '\t' << item->name << endl;
 		item = item->nextItem;
 	}
 }

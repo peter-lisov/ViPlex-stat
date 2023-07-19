@@ -1,4 +1,5 @@
 #include <string>
+#include <fstream>
 
 #ifndef PLAYLIST_H
 #define PLAYLIST_H
@@ -24,6 +25,7 @@ public:
 	int getDuration() {return duration;}
 	void add(int iOrder, string iName, int iDuration);
 	void print();
+	void print(ofstream &file);
 };
 
 #endif

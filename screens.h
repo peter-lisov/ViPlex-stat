@@ -21,6 +21,7 @@ public:
 	void add(string plName, int order, string itName, int duration);
 	void print(string plName);
 	void print();
+	void generateHTML();
 };
 
 #endif

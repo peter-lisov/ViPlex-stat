@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
 		LEFT JOIN nova_relation_page2widget ON nova_relation_scene2page.pageuuid = nova_relation_page2widget.pageuuid \
 		LEFT JOIN nova_widget ON nova_relation_page2widget.widgetuuid = nova_widget.uuid \
 		WHERE nova_scene.constraints NOT LIKE '%2,4,6%' \
-		ORDER BY nova_playlist.name, nova_page.viewOrder";
+		ORDER BY nova_playlist.name DESC, nova_page.viewOrder DESC";
 
 
    /* Execute SQL statement */
@@ -72,6 +72,7 @@ int main(int argc, char* argv[]) {
 
 scr.print("Viaduk");
 scr.print();
+scr.generateHTML();
 
    sqlite3_close(db);
 }
