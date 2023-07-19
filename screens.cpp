@@ -80,7 +80,7 @@ void Screens::generateHTML()
 </head>\
 <body>\
   <div class='container'>\
-    <h1 style='font-size: 20px; text-align: center;'>Статистика по экранам</h1>\
+    <h1 style='font-size: 20px; text-align: center;'>Текущие плейлисты</h1>\
     <div class='tabs'>";
 
 		screen = firstItem;
