@@ -103,7 +103,7 @@ void Screens::generateHTML()
 			if(block_duration >= 295) file << "style = 'background-color: #ffa0a0;' ";
 			file << "href=\"#" << screen->playlist->getName().c_str() << "\">";
 			file << "<div style='float: right;'>(" << setfill('0') << setw(2) << block_duration / 60 << ":" << setfill('0') << setw(2) << block_duration % 60 << ")</div>";
-			file << screen->playlist->getName().c_str() << "</a>\n";
+			file << screen->playlist->getName().c_str() << "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n";
 			screen = screen->nextItem;
 		}
 		file <<
