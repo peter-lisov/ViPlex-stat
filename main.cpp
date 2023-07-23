@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
       fprintf(stdout, "Operation done successfully\n");
    }
 
-scr.print("Viaduk");
+// scr.print("Viaduk");
 scr.print();
 scr.generateHTML();
 

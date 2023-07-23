@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include <string>
 #include "screens.h"
 #include "playlist.h"
@@ -93,8 +94,16 @@ void Screens::generateHTML()
 		file << "      <div class=\"tabs__links\">\n";
 		screen = firstItem;
 		while(screen) {
-			file << "        <a href=\"#" << screen->playlist->getName().c_str() << "\">" <<
-			screen->playlist->getName().c_str() << "\t(" << screen->playlist->getDuration() << " сек)" << "</a>\n";
+			int duration = screen->playlist->getDuration();
+			int block_duration;
+			if(!screen->playlist->getName().find("Barceloneta") or screen->playlist->getName() == "SeaZone") block_duration = duration;
+			else if(screen->playlist->getName() == "Moremoll-in") block_duration = duration / 3;
+			else block_duration = duration / 2;
+			file << "        <a ";
+			if(block_duration >= 295) file << "style = 'background-color: #ffa0a0;' ";
+			file << "href=\"#" << screen->playlist->getName().c_str() << "\">";
+			file << "<div style='float: right;'>(" << setfill('0') << setw(2) << block_duration / 60 << ":" << setfill('0') << setw(2) << block_duration % 60 << ")</div>";
+			file << screen->playlist->getName().c_str() << "</a>\n";
 			screen = screen->nextItem;
 		}
 		file <<
