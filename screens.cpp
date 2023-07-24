@@ -70,22 +70,27 @@ void Screens::generateHTML()
 	file.open("index.html");
 	if(file.is_open()) {
 	file <<
-"<!DOCTYPE html>\
-<html lang='ru'>\
-<head>\
-  <meta charset='utf-8'>\
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\
-  <meta name='viewport' content='width=device-width, initial-scale=1'>\
-  <link rel='stylesheet' type='text/css' href='style.css' />\
-  <title>Статистика по экранам</title>\
-</head>\
-<body>\
-  <div class='container'>\
-    <h1 style='font-size: 20px; text-align: center;'>Текущие плейлисты</h1>\
-    <div class='tabs'>";
+"<!DOCTYPE html>\n\
+<html lang='ru'>\n\
+<head>\n\
+  <meta charset='utf-8'>\n\
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n\
+  <meta http-equiv='refresh' content='7200'>\n\
+  <meta name='viewport' content='width=device-width, initial-scale=1'>\n\
+  <link rel='stylesheet' type='text/css' href='style.css' />\n\
+  <title>Статистика по экранам</title>\n\
+</head>\n\
+<body>\n\
+  <div class='container'>\n\
+    <h1 style='font-size: 20px; text-align: center;'>Текущие плейлисты</h1>\n\
+    <div class='tabs'>\n";
 
 		screen = firstItem;
 		while(screen) {
+			if(!screen->playlist->getName().find("Barceloneta") or screen->playlist->getName() == "SeaZone" or screen->playlist->getName() == "Hmeli-Suneli") {
+                screen = screen->nextItem;
+                continue;
+            }
 			file << "      <div id=\"" << screen->playlist->getName().c_str() << "\"><pre>";
 			screen->playlist->print(file);
 			file << "</pre>\n      </div>\n";
@@ -94,10 +99,13 @@ void Screens::generateHTML()
 		file << "      <div class=\"tabs__links\">\n";
 		screen = firstItem;
 		while(screen) {
+			if(!screen->playlist->getName().find("Barceloneta") or screen->playlist->getName() == "SeaZone" or screen->playlist->getName() == "Hmeli-Suneli") {
+                screen = screen->nextItem;
+                continue;
+            }
 			int duration = screen->playlist->getDuration();
 			int block_duration;
-			if(!screen->playlist->getName().find("Barceloneta") or screen->playlist->getName() == "SeaZone") block_duration = duration;
-			else if(screen->playlist->getName() == "Moremoll-in") block_duration = duration / 3;
+			if(screen->playlist->getName() == "Moremoll-in") block_duration = duration / 3;
 			else block_duration = duration / 2;
 			file << "        <a ";
 			if(block_duration >= 295) file << "style = 'background-color: #ffa0a0;' ";
@@ -107,10 +115,10 @@ void Screens::generateHTML()
 			screen = screen->nextItem;
 		}
 		file <<
-"      </div>\
-    </div>\
-  </div>\
-</body>\
+"      </div>\n\
+    </div>\n\
+  </div>\n\
+</body>\n\
 </html>";
 	}
 	file.close();
